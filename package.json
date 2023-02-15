@@ -1,0 +1,18 @@
+{
+  "name": "abusix_auth_ppd",
+  "version": "1.0.0",
+  "description": "Abusix Authentication Postfix Policy Daemon",
+  "main": "abusix_auth_ppd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Steve Freegard <steve.freegard@abusix.com>",
+  "license": "GPLv3",
+  "dependencies": {
+    "byline": "^5.0.0",
+    "ini": "^1.3.8",
+    "ipaddr.js": "^2.0.1",
+    "redis": "^4.6.4",
+    "sprintf-js": "^1.1.2"
+  }
+}

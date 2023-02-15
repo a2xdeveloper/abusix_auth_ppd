@@ -1,0 +1,13 @@
+[Unit]
+Description=Abusix Postfix Auth Policy Daemon
+After=network.target postfix.service
+
+[Service]
+Environment=
+Type=simple
+User=nobody
+ExecStart=/opt/abusix-auth-ppd/abusix_auth_ppd.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
