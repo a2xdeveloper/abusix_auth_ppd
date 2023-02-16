@@ -4,8 +4,8 @@ Abusix AUTH Policy Daemon
 This is a Postfix Policy daemon designed to use Abusix Mail Intelligence to catch, report and prevent compromised accounts after authenticating successfully to Postfix.
 
 ## Requirements
-NodeJS (>=14 should work)
-Redis Server (this can be installed on the same host or remote)
+NodeJS (>=14 should work)<br/>
+Redis Server (any version) (this can be installed on the same host or remote)
 
 ## Installation from source
 `````
@@ -35,10 +35,15 @@ Run `sudo systemctl status abusix_auth_ppd` to ensure that it is running correct
 
 ### Postfix Configuration
 
-Edit the Postfix `main.cf` file and add the following to the start of `smtpd_sender_restrictions =` (or add this section if it does not already exist):
+Edit the Postfix `main.cf` file and add the following to the start of `smtpd_sender_restrictions =` (or add this section if it does not already exist), note that `check_policy_service` *MUST* appear before `permit_sasl_authenticated` if present, otherwise the policy service will not be consulted for authenticated connections and will not work:
 `````
 check_policy_service { inet:127.0.0.1:9998 }
 `````
+
+Example:
+````
+smtpd_sender_restrictions = reject_unauth_destination, check_policy_service inet:127.0.0.1:9998
+````
 
 If you are running the policy daemon on a separate server to Postfix, then will need to modify the IP address accordingly.
 
